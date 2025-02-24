@@ -1,0 +1,159 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Handphone</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #008B8B, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .calculator {
+            background-color: #f30b0b;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            transform: scale(1);
+            transition: transform 0.2s ease;
+        }
+
+        .calculator:hover {
+            transform: scale(1.05);
+        }
+
+        #screen {
+            width: 100%;
+            height: 80px; /* Increased height for a larger display */
+            background-color: #e9d8d8;
+            color: #0d0c0c;
+            border: none;
+            border-radius: 10px;
+            text-align: right;
+            padding: 20px; /* Increased padding for better readability */
+            font-size: 48px; /* Increased font size */
+            box-sizing: border-box;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        button {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 12px;
+            padding: 25px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.1s, background-color 0.2s ease;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #555;
+            transform: translateY(-5px);
+        }
+
+        button:active {
+            background-color: #666;
+            transform: translateY(2px);
+        }
+
+        .equals {
+            grid-column: span 2;
+            background-color: #f39c12;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.1s;
+        }
+
+        .equals:hover {
+            background-color: #e67e22;
+            transform: translateY(-5px);
+        }
+
+        .equals:active {
+            background-color: #d35400;
+            transform: translateY(2px);
+        }
+
+        .zero {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="screen" id="screen" disabled>
+        <div class="buttons">
+            <button onclick="ClearScreen()">C</button>
+            <button onclick="appendValue('/')">/</button>
+            <button onclick="appendValue('*')">*</button>
+            <button onclick="appendValue('-')">-</button>
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('+')">+</button>
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button> <!-- Decimal point -->
+            <button onclick="calculatePercentage()">%</button> <!-- Percentage -->
+            <button onclick="appendValue('**')">^</button> <!-- Exponentiation -->
+        </div>
+    </div>
+
+    <script>
+        // Function to append values to the screen
+        function appendValue(value) {
+            document.getElementById('screen').value += value;
+        }
+
+        // Function to clear the screen
+        function ClearScreen() {
+            document.getElementById('screen').value = '';
+        }
+
+        // Function to calculate and display the result
+        function calculate() {
+            try {
+                var expression = document.getElementById('screen').value;
+                var result = eval(expression); // Evaluates the string expression
+                document.getElementById('screen').value = result; // Display the result
+            } catch (e) {
+                alert('Input tidak valid');
+                ClearScreen(); // Clear screen in case of an invalid expression
+            }
+        }
+
+        // Function to calculate percentage
+        function calculatePercentage() {
+            try {
+                var value = document.getElementById('screen').value;
+                var result = eval(value) / 100; // Calculate percentage (value / 100)
+                document.getElementById('screen').value = result; // Display the result
+            } catch (e) {
+                alert('Input tidak valid untuk persen');
+                ClearScreen(); // Clear screen in case of invalid input
+            }
+        }
+    </script>
+</body>
+</html>

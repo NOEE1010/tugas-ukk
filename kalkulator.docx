@@ -1,0 +1,34 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $angka1 = $_POST['angka1'];
+    $angka2 = $_POST['angka2'];
+    $operasi = $_POST['operasi'];
+    $hasil = 0;
+
+    switch ($operasi) {
+        case 'tambah':
+            $hasil = $angka1 + $angka2;
+            break;
+        case 'kurang':
+            $hasil = $angka1 - $angka2;
+            break;
+        case 'kali':
+            $hasil = $angka1 * $angka2;
+            break;
+        case 'bagi':
+            if ($angka2 != 0) {
+                $hasil = $angka1 / $angka2;
+            } else {
+                echo "Tidak bisa dibagi dengan nol!";
+                exit;
+            }
+            break;
+        default:
+            echo "Operasi tidak valid!";
+            exit;
+    }
+
+    echo "<h1>Hasil: $hasil</h1>";
+    echo "<a href='index.html'>Kembali</a>";
+}
+?>
